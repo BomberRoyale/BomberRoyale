@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  banco:
+    image: mysql:8.0
+    container_name: banco-mysql
+    restart: always #- Se o container parar ou o sistema reiniciar, ele será automaticamente iniciado de novo.
+    ports:
+      - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_dados:/var/lib/mysql #- Cria um volume chamado mysql_dados, que salva os dados do banco fora do container (evita perda de dados se você apagar o container).
+    networks:
+      - net_teste2
+
+  app:
+    build: .  # pasta onde está o Dockerfile da sua aplicação
+    container_name: app-node
+    depends_on:
+      - banco
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    ports:
+      - "3000:3000"
+    networks:
+      - net_teste2
+
+volumes:
+  mysql_dados:
+
+networks:
+  net_teste2:

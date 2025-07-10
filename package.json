@@ -1,0 +1,28 @@
+{
+  "name": "testenovo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/server.js",
+    "prepare": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "@types/ntp-client": "^0.5.0",
+    "mysql": "^2.18.1",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@types/ws": "^8.5.4",
+    "mysql2": "^3.14.1",
+    "ntp-client": "^0.5.3",
+    "uuidv4": "^6.2.13",
+    "ws": "^8.11.0"
+  }
+}
